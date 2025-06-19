@@ -2,13 +2,13 @@ import os
 import sys
 import asyncio
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from langgraph.graph import StateGraph, END
 from langchain_core.runnables import Runnable
 from typing import TypedDict
 from langchain_core.runnables import RunnableLambda
-from tools.gpt_tools import (
+from ..tools.gpt_tools import (
     get_location_tool,
     get_menu_tool,
     get_context_tool,
@@ -116,17 +116,18 @@ graph_builder.add_node("extract_filters", RunnableLambda(extract_all))
 graph_builder.set_entry_point("extract_filters")
 
 # 조건부 엣지 매핑 수정
+# 조건부 엣지 매핑 수정: next_tool_selector 함수를 조건으로 사용하고, 그 반환 값에 따라 엣지 매핑
 graph_builder.add_conditional_edges(
     "extract_filters",
-    {
-        "intersection_node": lambda x: not x.get("end", False),
-        END: lambda x: x.get("end", False)
+    next_tool_selector, # 조건 함수
+    { # 조건 함수의 결과에 따른 매핑
+        "intersection_node": "intersection_node", # next_tool_selector가 "intersection_node"를 반환하면 "intersection_node" 노드로 이동
+        END: END                                  # next_tool_selector가 END를 반환하면 그래프 종료
     }
 )
 graph_builder.add_edge("intersection_node", "detail_node")
 graph_builder.add_edge("detail_node", "final_node")
 graph_builder.add_edge("final_node", END)
-
 
 # 실행 함수
 async def run_recommendation_pipeline(state: dict) -> dict:
