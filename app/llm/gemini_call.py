@@ -3,10 +3,12 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 import os
 from dotenv import load_dotenv
 import asyncio
-JWT_TOKEN = os.getenv("JWT_TOKEN")
+
+# .env 파일 로드
 load_dotenv()
 
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+JWT_TOKEN = os.getenv("JWT_TOKEN")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY"))
 
 llm = ChatGoogleGenerativeAI(model="models/gemini-1.5-pro", google_api_key=GOOGLE_API_KEY, model_kwargs={"streaming": True})
 
