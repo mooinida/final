@@ -7,6 +7,10 @@ import os
 import math
 from my_token.token_storage import get_valid_access_token
 import aiohttp
+from dotenv import load_dotenv
+
+# .env 파일 로드
+load_dotenv()
 
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
