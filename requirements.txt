@@ -1,0 +1,51 @@
+# FastAPI 및 웹 프레임워크
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# LangChain 및 AI 관련
+langchain==0.1.0
+langchain-core==0.1.0
+langchain-google-genai==0.0.6
+langgraph==0.0.20
+
+# HTTP 클라이언트
+requests==2.31.0
+httpx==0.25.2
+aiohttp==3.9.1
+
+# 데이터베이스 및 캐싱
+redis==5.0.1
+
+# 환경변수 관리
+python-dotenv==1.0.0
+
+# JWT 토큰 처리
+PyJWT==2.8.0
+
+# 비동기 프로그래밍
+asyncio
+
+# 수학 계산
+math
+
+# JSON 처리
+json
+
+# 정규표현식
+re
+
+# 시스템 및 OS 관련
+os
+sys
+
+# 타입 힌트
+typing
+
+# 컬렉션
+collections
+
+# CORS 미들웨어 (FastAPI에 포함됨)
+# fastapi.middleware.cors
+
+# 비동기 HTTP 클라이언트 (aiohttp에 포함됨)
+# aiohttp.ClientSession 
