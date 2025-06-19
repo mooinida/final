@@ -1,4 +1,4 @@
-from agent.langGraphRunner import run_recommendation_pipeline
+from ..agent.langGraphRunner import run_recommendation_pipeline
 from fastapi import APIRouter
 router = APIRouter()
 
