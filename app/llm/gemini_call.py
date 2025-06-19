@@ -8,7 +8,7 @@ import asyncio
 load_dotenv()
 
 JWT_TOKEN = os.getenv("JWT_TOKEN")
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY"))
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 llm = ChatGoogleGenerativeAI(model="models/gemini-1.5-pro", google_api_key=GOOGLE_API_KEY, model_kwargs={"streaming": True})
 
@@ -22,7 +22,7 @@ async def call_llm(prompt: str):
 
 async def analyze_restaurant(restaurant: dict) -> dict:
     prompt = build_review_prompt(restaurant)
-    response =await call_llm(prompt)
+    response = await call_llm(prompt)
     
     result = {
         "placeId": restaurant["placeId"],
@@ -32,6 +32,7 @@ async def analyze_restaurant(restaurant: dict) -> dict:
     }
     print(result)
     return result
+
 async def run_llm_analysis(data: dict) -> list:
     restaurants = data.get("restaurants", [])
     print("---------------------------------------------")
@@ -42,8 +43,7 @@ async def run_llm_analysis(data: dict) -> list:
     tasks = [analyze_restaurant(r) for r in restaurants]
     return await asyncio.gather(*tasks)
 
-
-async def get_final_recommendation(results: list, input_text:str) -> str:
+async def get_final_recommendation(results: list, input_text: str) -> str:
     """
     전체 흐름: 개별 분석 → 종합 프롬프트 → 최종 추천 생성
     """
