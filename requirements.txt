@@ -20,32 +20,4 @@ redis==5.0.1
 python-dotenv==1.0.0
 
 # JWT 토큰 처리
-PyJWT==2.8.0
-
-# 비동기 프로그래밍
-asyncio
-
-# 수학 계산
-math
-
-# JSON 처리
-json
-
-# 정규표현식
-re
-
-# 시스템 및 OS 관련
-os
-sys
-
-# 타입 힌트
-typing
-
-# 컬렉션
-collections
-
-# CORS 미들웨어 (FastAPI에 포함됨)
-# fastapi.middleware.cors
-
-# 비동기 HTTP 클라이언트 (aiohttp에 포함됨)
-# aiohttp.ClientSession 
+PyJWT==2.8.0 
