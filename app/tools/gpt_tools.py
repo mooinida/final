@@ -24,7 +24,7 @@ from service.saveRestaurant_pipeline import filtering_restaurant
 
 # Define the state structure
 class State(TypedDict):
-    user_id:str
+    user_id: str
     user_input: str
     location: dict
     menu: dict
@@ -36,7 +36,7 @@ class State(TypedDict):
 
 # LangGraph-compatible tools
 
-async def get_location_tool(user_id:str, input_text: str) -> dict:
+async def get_location_tool(user_id: str, input_text: str) -> dict:
     print("locationTool사용")
     location = await get_location_from_text(input_text)
     coords = await get_coordinates_from_location(location)
@@ -46,20 +46,20 @@ async def get_location_tool(user_id:str, input_text: str) -> dict:
     return restaurants
 
 
-async def get_menu_tool(user_id:str ,input_text: str) -> dict:
+async def get_menu_tool(user_id: str, input_text: str) -> dict:
     print("getmenuTool사용")
     keywords = await get_location_and_menu(input_text)
     restaurants = bring_menu_filter_restaurants(user_id, keywords)
     return restaurants
 
 
-async def get_context_tool(user_id:str, input_text: str) -> dict:
+async def get_context_tool(user_id: str, input_text: str) -> dict:
     print("getcontextTool사용")
     contexts = await get_location_and_context(input_text)
     restaurants = bring_context_filter_restaurants(user_id, contexts)
     return restaurants
 
-async def extract_all(user_id:str, input_text:str):
+async def extract_all(user_id: str, input_text: str):
     location_task = get_location_tool(user_id, input_text)
     menu_task = get_menu_tool(user_id, input_text)
     context_task = get_context_tool(user_id, input_text)
@@ -68,7 +68,7 @@ async def extract_all(user_id:str, input_text:str):
     return location, menu, context
 
 
-def get_restaurant_info(user_id:str, restaurant_ids: dict) -> dict:
+def get_restaurant_info(user_id: str, restaurant_ids: dict) -> dict:
     print("교집합:")
     print(restaurant_ids)
     try:
@@ -81,7 +81,7 @@ def get_restaurant_info(user_id:str, restaurant_ids: dict) -> dict:
         return {"error": f"파싱 실패: {str(e)}"}
 
 
-def intersection_restaurant(location:dict, menu:dict, context:dict):
+def intersection_restaurant(location: dict, menu: dict, context: dict):
     """
     여러 리스트에서 2번 이상 등장한 식당 ID만 반환하는 도구.
     """
@@ -113,12 +113,12 @@ def intersection_restaurant(location:dict, menu:dict, context:dict):
         return {"error": str(e)}
 
 
-async def final_recommend(restaurants_info: dict, input_text:str) -> dict:
+async def final_recommend(restaurants_info: dict, input_text: str) -> dict:
     ai_rating = await run_llm_analysis(restaurants_info)
     result = await get_final_recommendation(ai_rating, input_text)
     print(result)
-    return {"result":result,
-            "aiRating":ai_rating
+    return {"result": result,
+            "aiRating": ai_rating
             }
 
 graph_builder = StateGraph(State)
