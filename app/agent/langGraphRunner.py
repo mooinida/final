@@ -104,9 +104,9 @@ async def final_node(state: State) -> dict:
 # LangGraph 설정
 graph_builder = StateGraph(State)
 
-graph_builder.add_node("location_node", location_node)
-graph_builder.add_node("menu_node", menu_node)
-graph_builder.add_node("context_node", context_node)
+#graph_builder.add_node("location_node", location_node)
+#graph_builder.add_node("menu_node", menu_node)
+#graph_builder.add_node("context_node", context_node)
 graph_builder.add_node("intersection_node", intersection_node)
 graph_builder.add_node("detail_node", detail_node)
 graph_builder.add_node("final_node", final_node)
