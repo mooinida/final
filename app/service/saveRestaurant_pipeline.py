@@ -116,7 +116,7 @@ async def get_coordinates_from_location(location: str):
     except Exception as e:
         return {"error": f"예외 발생: {str(e)}"}    
 
-SPRING_SERVER = "http://localhost:8080"
+SPRING_SERVER = "http://mooin.shop:8080"
 def get_nearby_restaurants_DB(user_id:str, latitude: float, longitude: float, radius: int) -> dict:
     params = {
         "lat": latitude,
