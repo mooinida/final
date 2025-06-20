@@ -1,7 +1,7 @@
 import requests
 from my_token.token_storage import get_valid_access_token
 import httpx
-SPRING_SERVER = "http://localhost:8080"
+SPRING_SERVER = "http://mooin.shop:8080"
 
 def bring_menu_filter_restaurants(user_id:str, keywords:list):
     url = f"{SPRING_SERVER}/api/restaurants/filter/menu"
