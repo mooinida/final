@@ -19,7 +19,7 @@ async def save_token_from_redirect(token: str):
         # Redis에 저장
         save_access_token(user_id, token)
 
-        return RedirectResponse(url=f"http://localhost:5173/recommend?user_id={user_id}")
+        return RedirectResponse(url=f"http://mooin.shop:5173/recommend?user_id={user_id}")#localhost:5173
 
     except jwt.ExpiredSignatureError:
         return {"error": "만료된 토큰입니다"}
